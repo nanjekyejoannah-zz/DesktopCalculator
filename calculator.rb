@@ -13,6 +13,8 @@ Shoes.app(title: "My calculator", width: 200, height: 240) do
 
     	flow width: 0.3, height: 0.2 do
     		button 'del',  width: 1.0 , height: 1.0 do
+    			@number = 0
+    			number_field.replace(@number)
     		end
     	end
 
@@ -21,9 +23,14 @@ Shoes.app(title: "My calculator", width: 200, height: 240) do
 
       		%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *).each do |btn|
       			button btn , width: 50 , height: 50 do
+      				case btn
+			          when /[0-9]/ 
+			              @number = @number.to_i * 10 + btn.to_i
+			          end
+			          number_field.replace(@number)  
+      				end
       			end
-      		end
-    	end
+    		end
 
 	end
 end
